@@ -194,5 +194,40 @@ bind: "192.168.1.1"
 
 ##### spec.servers[].tls.insecureSkipVerify – отключение проверки сертификата
 
+```yaml
+tls:
+  mode: SIMPLE
+  insecureSkipVerify: true
 ```
+
+- Отключает проверку сертификата **(НЕБЕЗОПАСНО, только для тестов)**.
+
+## Примеры
+
+### Gateway с HTTPS и Let’s Encrypt
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-https-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: my-letsencrypt-secret
+      hosts:
+        - "example.com"
 ```
+
+✅ Принимает трафик по **HTTPS (порт 443)**.
+
+- Использует **Let’s Encrypt** сертификат.
+
+- Работает только для example.com.
