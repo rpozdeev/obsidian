@@ -226,8 +226,28 @@ spec:
         - "example.com"
 ```
 
-✅ Принимает трафик по **HTTPS (порт 443)**.
-
+- Принимает трафик по **HTTPS (порт 443)**.
 - Использует **Let’s Encrypt** сертификат.
-
 - Работает только для example.com.
+
+### TCP Gateway для базы данных
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: postgres-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 5432
+        name: tcp-postgres
+        protocol: TCP
+      hosts:
+        - "*"
+```
+
+- Открывает порт **5432** для **PostgreSQL**.
+- Принимает трафик от **любого клиента**.
