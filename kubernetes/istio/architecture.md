@@ -1,3 +1,8 @@
+---
+tags:
+  - ingressgateway
+  - egressgateway
+---
 # Архитектура интеграции Istio и Kubernetes
 
 | **Компонент Istio**       | **Роль**                                                                               | **Интеграция с Kubernetes**                                                                     |
@@ -41,8 +46,6 @@ kubectl get pods -n default -o jsonpath='{.items[*].spec.containers[*].name}'
 ```
 
 # Управление входящим и исходящим трафиком
-
-# ingressgateway #egressgateway
 
 ## Ingress Gateway (входящий трафик)
 
