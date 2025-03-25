@@ -132,7 +132,23 @@ servers:
 
 - port.number – номер порта (обычно 80, 443 или кастомный).
 - port.name – название порта (должно быть http, https, tcp, tls).
-
 - port.protocol – протокол (HTTP, HTTPS, TCP, TLS, GRPC).
+- hosts – список **доменов**, для которых работает Gateway ("*" означает все домены).
 
-• hosts – список **доменов**, для которых работает Gateway ("*" означает все домены).
+##### spec.servers[].tls – настройка HTTPS (TLS)
+
+```yaml
+tls:
+  mode: SIMPLE
+  credentialName: my-tls-secret
+```
+
+- mode – режим TLS:
+	- SIMPLE – стандартная TLS-терминация.
+- PASSTHROUGH – передача TLS без расшифровки (для mTLS).
+
+• MUTUAL – мьютуальная TLS-аутентификация.
+
+• AUTO_PASSTHROUGH – автоматический passthrough для HTTPS.
+
+• credentialName – имя **Kubernetes Secret** с сертификатом.
