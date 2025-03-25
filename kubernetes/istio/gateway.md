@@ -76,5 +76,34 @@ spec:
               number: 9080
 ```
 
-## # istiogateway #ingressgateway
+## Полное описание всех полей Gateway в Istio
 
+**Gateway** в Istio управляет **входящим и исходящим трафиком** на уровне сети, предоставляя гибкую маршрутизацию и защиту.
+
+### Общая структура Gateway
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: my-gateway
+spec:
+  selector:
+    istio: ingressgateway  # Выбираем Istio Ingress Gateway
+  servers:
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: my-tls-secret
+      hosts:
+        - "example.com"
+```
+
+#### Основные секции
+- selector – указывает, к какому Pod (Ingress/Egress) применять Gateway.
+- servers – определяет, на каких портах слушать трафик.
+- hosts – список доменов, которые обрабатывает Gateway.
+- tls – конфигурация TLS (SSL).
