@@ -145,10 +145,20 @@ tls:
 
 - mode – режим TLS:
 	- SIMPLE – стандартная TLS-терминация.
-- PASSTHROUGH – передача TLS без расшифровки (для mTLS).
+	- PASSTHROUGH – передача TLS без расшифровки (для mTLS).
+	- MUTUAL – мьютуальная TLS-аутентификация.
+	- AUTO_PASSTHROUGH – автоматический passthrough для HTTPS.
+- credentialName – имя **Kubernetes Secret** с сертификатом.
 
-• MUTUAL – мьютуальная TLS-аутентификация.
+##### spec.servers[].hosts – домены, обрабатываемые Gateway
 
-• AUTO_PASSTHROUGH – автоматический passthrough для HTTPS.
+```yaml
+hosts:
+  - "example.com"
+  - "*.example.com"
+```
 
-• credentialName – имя **Kubernetes Secret** с сертификатом.
+- Определяет **список доменов**, для которых действует Gateway.
+- Можно указать **поддомены** ("*.example.com" – все поддомены example.com).
+- "*" – обрабатывает трафик **с любых доменов** (небезопасно).
+
