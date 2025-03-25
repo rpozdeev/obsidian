@@ -1,0 +1,24 @@
+{
+	"nodes":[
+		{"id":"58c9f458fbfa697f","x":-900,"y":-280,"width":1260,"height":170,"type":"group","label":"Query"},
+		{"id":"df70248a70a0b666","type":"group","x":-900,"y":-460,"width":855,"height":100,"label":"SELECT"},
+		{"id":"cd626cebad24cde6","type":"text","text":"OS Cache","x":-417,"y":-440,"width":157,"height":60},
+		{"id":"2df43e23c2282be4","type":"text","text":"Data FIles","x":-220,"y":-440,"width":155,"height":60},
+		{"id":"3783c95e3c1ccaaf","type":"text","text":"Backend Processor","x":-880,"y":-440,"width":220,"height":60},
+		{"id":"0168aa8d0e323f0f","type":"text","text":"Shared Buffer","x":-620,"y":-440,"width":168,"height":60},
+		{"id":"beda55a2e38fb06b","x":-100,"y":-260,"width":255,"height":130,"type":"text","text":"Planner (Index, Sequential scan, bitmap scan) поиск самого быстрого пути поиска."},
+		{"id":"05d105aa99e598a9","x":200,"y":-225,"width":140,"height":60,"type":"text","text":"Executor"},
+		{"id":"49c62f0305f82f40","type":"text","text":"Connection Manager","x":-880,"y":-225,"width":230,"height":60},
+		{"id":"ccf18f2a4994a66f","x":-600,"y":-245,"width":200,"height":100,"type":"text","text":"Parser\n(синтаксический анализ)"},
+		{"id":"1cb4c4255a662767","x":-353,"y":-255,"width":202,"height":120,"type":"text","text":"Rewriter\n(оптимизация и переписывание запроса)"}
+	],
+	"edges":[
+		{"id":"35cee1b3a25dc29b","fromNode":"3783c95e3c1ccaaf","fromSide":"right","toNode":"0168aa8d0e323f0f","toSide":"left"},
+		{"id":"f24b7fad41c3b215","fromNode":"0168aa8d0e323f0f","fromSide":"right","toNode":"cd626cebad24cde6","toSide":"left"},
+		{"id":"ad24dd27678a3822","fromNode":"cd626cebad24cde6","fromSide":"right","toNode":"2df43e23c2282be4","toSide":"left"},
+		{"id":"e894db73e69354b7","fromNode":"49c62f0305f82f40","fromSide":"right","toNode":"ccf18f2a4994a66f","toSide":"left"},
+		{"id":"da59de357d806d5e","fromNode":"ccf18f2a4994a66f","fromSide":"right","toNode":"1cb4c4255a662767","toSide":"left"},
+		{"id":"8ffc232639a26031","fromNode":"1cb4c4255a662767","fromSide":"right","toNode":"beda55a2e38fb06b","toSide":"left"},
+		{"id":"b41ccb1cad5a47e9","fromNode":"beda55a2e38fb06b","fromSide":"right","toNode":"05d105aa99e598a9","toSide":"left"}
+	]
+}
