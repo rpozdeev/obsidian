@@ -175,4 +175,24 @@ protocol: HTTP
 - TLS – защищенный трафик без расшифровки (mTLS).
 - GRPC – трафик для gRPC-сервисов.
 
-Пример 
+Пример TCP
+```yaml
+port:
+  number: 9000
+  name: tcp
+  protocol: TCP
+```
+
+##### spec.servers[].bind – привязка к IP
+
+```yaml
+bind: "192.168.1.1"
+```
+
+- Определяет **конкретный IP**, на котором будет слушать Gateway.
+- По умолчанию слушает на всех IP (0.0.0.0).
+
+##### spec.servers[].tls.insecureSkipVerify – отключение проверки сертификата
+
+```
+```
