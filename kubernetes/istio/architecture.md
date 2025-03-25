@@ -15,6 +15,7 @@
 | DestinationRule     | Управляет балансировкой нагрузки, мTLS. |
 | Gateway             | Настраивает входящий/исходящий трафик.  |
 | AuthorizationPolicy | Определяет политики безопасности.       |
+
 ```shell
 kubectl get crds  grep istio
 ```
@@ -34,14 +35,17 @@ kubectl label namespace default istio-injection=enabled
 ```
 
 Проверка
+
 ```bash
 kubectl get pods -n default -o jsonpath='{.items[*].spec.containers[*].name}'
 ```
 
 # Управление входящим и исходящим трафиком
-#ingressgateway #egressgateway
+
+# ingressgateway #egressgateway
 
 ## Ingress Gateway (входящий трафик)
+
 Istio заменяет стандартный Ingress, предоставляя более гибкие настройки.
 
 ```yaml
@@ -63,8 +67,9 @@ spec:
 
 ## Egress Gateway (исходящий трафик)
 
-Позволяет контролировать выходящий трафик из кластера. 
-### Пример **ServiceEntry** для доступа к внешнему API:
+Позволяет контролировать выходящий трафик из кластера.
+
+### Пример **ServiceEntry** для доступа к внешнему API
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
