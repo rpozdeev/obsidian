@@ -113,5 +113,26 @@ spec:
 selector:
   istio: ingressgateway
 ```
+
 - Определяет **Ingress/Egress Gateway**, к которому применяется конфигурация.
-- Значение istio: ingressgateway означает, что конфигурация применяется к istio-ingressgateway.
+- Значение `istio: ingressgateway` означает, что конфигурация применяется к istio-ingressgateway.
+
+##### spec.servers – настройка серверов
+
+```yaml
+servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+      - "example.com"
+      - "*.example.com"
+```
+
+- port.number – номер порта (обычно 80, 443 или кастомный).
+- port.name – название порта (должно быть http, https, tcp, tls).
+
+- port.protocol – протокол (HTTP, HTTPS, TCP, TLS, GRPC).
+
+• hosts – список **доменов**, для которых работает Gateway ("*" означает все домены).
