@@ -107,3 +107,11 @@ spec:
 - servers – определяет, на каких портах слушать трафик.
 - hosts – список доменов, которые обрабатывает Gateway.
 - tls – конфигурация TLS (SSL).
+
+##### spec.selector – выбор Gateway
+```yaml
+selector:
+  istio: ingressgateway
+```
+- Определяет **Ingress/Egress Gateway**, к которому применяется конфигурация.
+- Значение istio: ingressgateway означает, что конфигурация применяется к istio-ingressgateway.
