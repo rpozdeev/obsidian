@@ -43,3 +43,28 @@ spec:
       hosts:
         - "*"  # Принимаем запросы с любых доменов
 ```
+
+### Создание VirtualService, связанный с Gateway
+
+Gateway **только принимает трафик**, но маршрутизация на сервисы идет через **VirtualService**.
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: bookinfo
+spec:
+  hosts:
+    - "*"  # Принимаем запросы со всех доменов
+  gateways:
+    - bookinfo-gateway  # Привязываем к Gateway
+  http:
+    - match:
+        - uri:
+            prefix: "/productpage"  # Маршрутизируем /productpage
+      route:
+        - destination:
+            host: productpage  # Направляем трафик в сервис productpage
+            port:
+              number: 9080
+```
