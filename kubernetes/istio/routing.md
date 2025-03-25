@@ -1,10 +1,9 @@
 ---
 tags:
   - virtualservice
+  - "#destinationRule"
 ---
 # VirtualService
-
-# virtualService
 
 VirtualService управляет входящим трафиком и направляет его в зависимости от **URI, заголовков, веса и версии приложения**.
 
@@ -112,10 +111,7 @@ route:
 
 # DestinationRule — балансировка и политики
 
-# DestinationRule
-
 После того, как VirtualService направил трафик, **DestinationRule** определяет поведение на уровне подов.
-
 ## Основные поля DestinationRule
 
 | **Поле**      | **Описание**                            |
