@@ -1,9 +1,15 @@
+---
+tags:
+  - gateway
+  - istiogateway 
+  - ingressgateway
+---
+
 # Istio Gateway для управления входящим трафиком
-#istiogateway #ingressgateway 
 
 **Gateway** в Istio — это объект, который управляет входящим (Ingress) и исходящим (Egress) трафиком **на уровне сети**, предоставляя возможности маршрутизации, балансировки нагрузки, а также поддержку TLS и HTTP/HTTPS.
 
-## Основные возможности:
+## Основные возможности
 
 - Прием **внешнего трафика** в кластер Kubernetes (Ingress).
 - Управление **исходящим трафиком** из кластера (Egress).
@@ -23,6 +29,7 @@
 | Канареечные релизы    | ❌ Нет                  | ✅ Да                                       |
 | Fault Injection       | ❌ Нет                  | ✅ Да                                       |
 | Интеграция с Istio    | ❌ Нет                  | ✅ Полная                                   |
+
 ## Установка Gateway в Istio
 
 ### Создание Gateway
@@ -68,3 +75,6 @@ spec:
             port:
               number: 9080
 ```
+
+## # istiogateway #ingressgateway
+

@@ -3,7 +3,6 @@ tags:
   - canary_deployment
   - a/b_testing
   - fault_injection
-TQ_short_mode: false
 ---
 # Канареечный релиз (Canary Deployment)
 
