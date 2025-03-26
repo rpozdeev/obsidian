@@ -37,7 +37,7 @@ services:
     ports:
       - 22181:2181
 
-  kafka:
+  kafka1:
     image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper
@@ -47,7 +47,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka1:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
@@ -72,12 +72,12 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 29093:29092
+      - 29094:29092
     hostname: kafka2
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka2:29093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka3:29094
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
@@ -90,7 +90,7 @@ services:
     restart: always
     environment:
       - KAFKA_CLUSTERS_0_NAME=local
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092,kafka2:29093
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092,kafka2:29093,kafka3:29094
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
     links:
       - kafka
