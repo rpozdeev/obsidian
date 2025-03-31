@@ -200,3 +200,83 @@ while read line; do
 done < file.txt
 ```
 
+### Переменные для аргументов
+
+Bash автоматически сохраняет переданные параметры в специальные переменные:
+
+|Переменная|Описание|Пример (`./script.sh a b c`)|
+|---|---|---|
+|`$0`|Имя скрипта|`./script.sh`|
+|`$1`, `$2`, ...|Позиционные аргументы (1-й, 2-й...)|`$1="a"`, `$2="b"`|
+|`$#`|Количество аргументов|`3`|
+|`$@`|Все аргументы как массив|`("a" "b" "c")`|
+|`$*`|Все аргументы как одна строка|`"a b c"`|
+#### Проверка наличия аргументов
+##### Простая проверка (`if [ -z ... ]`)
+```bash
+if [ -z "$1" ]; then
+    echo "Ошибка: не указан аргумент!"
+    exit 1
+fi
+```
+##### Проверка количества (`$#`)
+```bash
+if [ "$#" -lt 2 ]; then
+    echo "Нужно 2 аргумента, получено: $#"
+    exit 1
+fi
+```
+
+#### Обработка ключей (`-f`, `--help`)
+
+Для сложных скриптов с опциями (`-i`, `--output`) используйте `getopts` (для коротких флагов) или `getopt` (для длинных).
+
+##### `getopts` (простой способ)
+Поддержка коротких опций (`-v`, `-f file`):
+
+```bash
+#!/bin/bash
+while getopts "u:p:h" opt; do
+    case $opt in
+        u) username="$OPTARG" ;;
+        p) password="$OPTARG" ;;
+        h) echo "Использование: $0 -u USER -p PASS"; exit 0 ;;
+        *) echo "Неизвестная опция: -$opt" >&2; exit 1 ;;
+    esac
+done
+
+echo "User: $username, Pass: $password"
+```
+
+```bash
+./script.sh -u admin -p 12345
+```
+
+##### `getopt` (длинные опции `--help`)
+
+Установите `getopt` (если нет):
+```bash
+sudo apt install util-linux  # для Linux
+```
+
+```bash
+#!/bin/bash
+options=$(getopt -o u:p:h --long username:,password:,help -n "$0" -- "$@")
+eval set -- "$options"
+
+while true; do
+    case "$1" in
+        -u|--username) username="$2"; shift 2 ;;
+        -p|--password) password="$2"; shift 2 ;;
+        -h|--help) echo "Помощь: $0 --username NAME --password PASS"; exit 0 ;;
+        --) shift; break ;;
+        *) echo "Ошибка в аргументах!"; exit 1 ;;
+    esac
+done
+
+echo "User: $username, Pass: $password"
+```
+
+```bash
+./script.sh --username admin --password 12345
+```
