@@ -24,3 +24,11 @@ sum=$((a + b))
 echo "Сумма: $sum"
 ```
 
+### Условные операторы
+```bash
+if [ $a -gt $b ]; then
+    echo "$a больше $b"
+else
+    echo "$a не больше $b"
+fi
+```
