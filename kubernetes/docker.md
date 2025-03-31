@@ -36,6 +36,42 @@ tags:
                              +----------------------------+
 ```
 
+## Основные параметры Docker Daemon
+
+```json
+{
+  "log-level": "info",
+  "storage-driver": "overlay2",
+  "data-root": "/var/lib/docker",
+  "insecure-registries": ["myregistry.local:5000"],
+  "registry-mirrors": ["https://mirror.gcr.io"],
+  "dns": ["8.8.8.8", "8.8.4.4"],
+  "experimental": true,
+  "max-concurrent-downloads": 3,
+  "live-restore": true
+}
+```
+
+#### Описание основных параметров
+| **Параметр**                 | **Описание**                                                      | **Пример значения**                     |
+| ---------------------------- | ----------------------------------------------------------------- | --------------------------------------- |
+| **log-level**                | Уровень логирования (debug, info, warn, error, fatal)             | "info"                                  |
+| **storage-driver**           | Драйвер хранения данных контейнеров                               | "overlay2"                              |
+| **data-root**                | Директория для хранения данных Docker                             | "/var/lib/docker"                       |
+| **insecure-registries**      | Небезопасные (HTTP) реестры Docker                                | ["myregistry.local:5000"]               |
+| **registry-mirrors**         | Зеркала Docker Hub для ускорения загрузки образов                 | ["https://mirror.gcr.io"]               |
+| **dns**                      | Настройки DNS-серверов для контейнеров                            | ["8.8.8.8", "8.8.4.4"]                  |
+| **max-concurrent-downloads** | Максимальное количество одновременных загрузок                    | 3                                       |
+| **max-concurrent-uploads**   | Максимальное количество одновременных загрузок образов            | 5                                       |
+| **live-restore**             | Обеспечивает сохранение контейнеров при перезапуске Docker Daemon | true                                    |
+| **iptables**                 | Управление настройками iptables через Docker                      | true                                    |
+| **bridge**                   | Настройка моста Docker                                            | "docker0"                               |
+| **mtu**                      | Установка MTU для сети Docker                                     | 1500                                    |
+| **bip**                      | Настройка IP-пула для мостовой сети                               | "192.168.1.1/24"                        |
+| **no-new-privileges**        | Отключение повышения привилегий в контейнере                      | true                                    |
+| **exec-opts**                | Опции выполнения контейнеров (например, настройки runc)           | ["native.cgroupdriver=systemd"]         |
+| **default-address-pools**    | Настройка диапазонов IP-адресов для создания сетей                | [{"base": "172.80.0.0/16", "size": 24}] |
+| **experimental**             | Включение экспериментальных функций Docker                        | true                                    |
 
 ## Пространства имен (namespaces) в ядре Linux
 
