@@ -111,3 +111,12 @@ class ValueTooLargeError(Error):
     """Вызывается, когда входное значение велико"""
     pass
 ```
+
+
+### Raise
+
+```python
+raise ReceiptEmissionFailed(order_id) from e
+```
+
+`from e` позволяет сохранить стек вызова
