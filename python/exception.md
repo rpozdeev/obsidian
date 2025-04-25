@@ -120,3 +120,44 @@ raise ReceiptEmissionFailed(order_id) from e
 ```
 
 `from e` позволяет сохранить стек вызова
+
+
+## Пример
+
+```python
+### Создаем классы исключений
+class OrderCreationException(Exception):
+    pass
+
+class OrderNotFound(OrderCreationException):
+    def __init__(self, order_id):
+        self.order_id = order_id
+        super().__init__(f"Заказ {order_id} не найден в БД.")
+
+class ReceiptGenerationFailed(OrderCreationException):
+    def __init__(self, order_id):
+        self.order_id = order_id
+        super().__init__(f"Печать чека не удалась! Заказ: {order_id} ")
+
+class ReceiptEmissionFailed(OrderCreationException):
+    def __init__(self, order_id):
+        self.order_id = order_id
+        super().__init__(f"Передача чека не удалась! Заказ: {order_id} ")
+
+class OrderService:
+    """Класс микросервиса"""
+    def emit(self, order_id: str) -> dict:
+        try:
+            ...
+        except OrderNotFound:
+            logger.exception("Ошибка базы данных")
+            raise
+        except ReceiptGenerationFailed:
+            logger.exception("Проблема с генерацией квитанции")
+            raise
+        except ReceiptEmissionFailed:
+            logger.exception("Проблема с отправкой квитанции")
+            raise
+        else:
+            return {"order_id": order_id, "order_status": order_status.value}
+```
