@@ -99,3 +99,53 @@ spec:
           prune: true
           selfHeal: true
 ```
+
+## Автоматическая синхронизация (syncPolicy)
+
+```yaml
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+```
+
+Это включает **автоматическое обновление приложений** из Git при изменении репозитория.
+
+
+## Lifecycle Hooks (хуки синхронизации)
+
+Хуки позволяют выполнять дополнительные действия до/после синхронизации. Например:
+
+- прогрев кеша
+- миграции базы
+- уведомления
+
+Пример Job
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pre-sync-job
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: wait
+        image: alpine
+        command: ["sh", "-c", "echo Подготовка... && sleep 5"]
+      restartPolicy: Never
+```
+### **Возможные типы хуков:**
+
+- PreSync — до применения изменений
+- Sync — замена основного ресурса (если надо)
+- PostSync — после применения
+- SyncFail — при ошибке синхронизации
+### **Параметры удаления:**
+
+- HookSucceeded
+- HookFailed
+- BeforeHookCreation (удалить перед созданием нового)
